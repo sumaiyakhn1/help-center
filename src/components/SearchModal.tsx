@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, X, BookOpen, Clock, ArrowRight } from 'lucide-react';
+import { Search, X, FileText, Clock, ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '../data/helpData';
 import { Article } from '../types';
 
@@ -23,10 +23,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
   const matchedArticles = searchTerm.trim()
     ? allArticles.filter(art =>
-      art.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      art.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      art.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-    )
+        art.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        art.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        art.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      )
     : allArticles.slice(0, 5); // Show popular guides when empty
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           />
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -76,7 +76,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         {/* Search Results / Popular List */}
         <div className="p-4 overflow-y-auto flex-1 space-y-2 custom-scrollbar">
           <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
-            <span>{searchTerm.trim() ? `Search Results (${matchedArticles.length})` : 'Popular Articles'}</span>
+            <span>{searchTerm.trim() ? `Matching PDF Guides (${matchedArticles.length})` : 'Popular PDF Guides'}</span>
             <span className="text-slate-400">Esc to close</span>
           </div>
 
@@ -91,7 +91,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 className="group p-3.5 rounded-xl bg-white hover:bg-orange-50/60 border border-slate-200 hover:border-orange-300 cursor-pointer transition-colors flex items-start gap-3"
               >
                 <div className="p-2 rounded-lg bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors mt-0.5">
-                  <BookOpen className="w-4 h-4" />
+                  <FileText className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-xs sm:text-sm font-bold text-slate-800 group-hover:text-orange-600 transition-colors truncate">
@@ -117,7 +117,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
             ))
           ) : (
             <div className="p-8 text-center text-slate-500 text-xs">
-              No help guides found matching "{searchTerm}". Try searching for 'Outpass', 'Fee', 'Attendance', or 'ID Card'.
+              No PDF guides found matching "{searchTerm}". Try searching for 'Counsellor', 'Admit Cards', 'Alumni', or 'Prospectus'.
             </div>
           )}
         </div>
