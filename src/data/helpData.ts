@@ -372,61 +372,6 @@ export const CATEGORIES: Category[] = [
     ]
   },
   {
-    id: 'counsellor',
-    slug: 'counsellor',
-    title: 'Counsellor',
-    description: 'Academic mentorship allocation, student well-being sessions, confidential counseling appointments, and career guidance.',
-    iconName: 'HeartHandshake',
-    articleCount: 1,
-    pdfCount: 1,
-    subcategories: [
-      {
-        id: 'counsel-guides',
-        title: 'Counsellor & Mentorship PDF Guides',
-        description: 'Guide on assigning counsellors and student tags in Okie Dokie portal.',
-        articleCount: 1,
-        pdfCount: 1,
-        articles: [
-          {
-            id: 'art-counsellor-tags-quick',
-            slug: 'how-to-assign-counsellor-and-tags-quick-guide',
-            title: 'How to Assign Counsellor and Tags (Quick Guide)',
-            description: 'SOP guide for assigning student counsellors and classification tags.',
-            categoryId: 'counsellor',
-            subcategoryId: 'counsel-guides',
-            readTime: '2 min read',
-            updatedAt: '2026-08-05',
-            author: 'Okie Dokie Solutions LLP',
-            tags: ['Counsellor', 'Mentorship', 'Student Tags', 'Allocation'],
-            pdfUrl: '/pdf/How_To_Assign_Counsellor_and_Tags.pdf',
-            pdfFileName: 'How_To_Assign_Counsellor_and_Tags.pdf',
-            pdfSize: '411 KB'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'transport',
-    slug: 'transport',
-    title: 'Transport',
-    description: 'Bus route tracking, live GPS location of campus shuttles, transport pass registration, and route fee payments.',
-    iconName: 'Bus',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
-    id: 'hostel',
-    slug: 'hostel',
-    title: 'Hostel',
-    description: 'Hostel room allotment, mess menu calendar, maintenance complaint desk, and room migration requests.',
-    iconName: 'Home',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
     id: 'library',
     slug: 'library',
     title: 'Library',
@@ -542,46 +487,6 @@ export const CATEGORIES: Category[] = [
     ]
   },
   {
-    id: 'attendance',
-    slug: 'attendance',
-    title: 'Attendance',
-    description: 'Subject-wise attendance tracking, condonation requests, biometric logs, and medical leave submission.',
-    iconName: 'CalendarCheck',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
-    id: 'payroll',
-    slug: 'payroll',
-    title: 'Payroll',
-    description: 'Faculty and staff salary slip downloads, tax deduction declarations, Form 16, and reimbursement claims.',
-    iconName: 'BadgeDollarSign',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
-    id: 'inventory',
-    slug: 'inventory',
-    title: 'Inventory',
-    description: 'Laboratory equipment requisition, department asset tracking, store supplies, and maintenance logs.',
-    iconName: 'Boxes',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
-    id: 'placement',
-    slug: 'placement',
-    title: 'Placement',
-    description: 'Campus placement drive registration, resume builder, company shortlists, interview slots, and offer letter tracking.',
-    iconName: 'Building2',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
-  },
-  {
     id: 'grievance',
     slug: 'grievance',
     title: 'Feedback & Grievance',
@@ -615,16 +520,6 @@ export const CATEGORIES: Category[] = [
         ]
       }
     ]
-  },
-  {
-    id: 'system',
-    slug: 'system',
-    title: 'System & Admin Settings',
-    description: 'Account security, password resets, Single Sign-On (SSO) login issues, 2FA setup, and system notifications.',
-    iconName: 'Settings',
-    articleCount: 0,
-    pdfCount: 0,
-    subcategories: []
   }
 ];
 
