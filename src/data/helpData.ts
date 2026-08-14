@@ -7,31 +7,16 @@ export const CATEGORIES: Category[] = [
     title: 'Student',
     description: 'Manage student profiles, digital ID cards, enrollment details, and academic record requests.',
     iconName: 'GraduationCap',
-    articleCount: 7,
-    pdfCount: 7,
+    articleCount: 6,
+    pdfCount: 6,
     subcategories: [
       {
         id: 'student-guides',
         title: 'Student Management PDF Guides',
         description: 'Official Okie Dokie procedures for student records, counsellor tags, data export, ID cards, and alumni.',
-        articleCount: 7,
-        pdfCount: 7,
+        articleCount: 6,
+        pdfCount: 6,
         articles: [
-          {
-            id: 'art-stud-counsellor-tags',
-            slug: 'how-to-assign-counsellor-and-tags',
-            title: 'How to Assign Counsellor and Tags (COUNSELLOR AND TAGS कैसे ASSIGN करें)',
-            description: 'Official step-by-step guide to assigning counsellors and student tags in Okie Dokie Admission portal.',
-            categoryId: 'student',
-            subcategoryId: 'student-guides',
-            readTime: '2 min read',
-            updatedAt: '2026-08-05',
-            author: 'Okie Dokie Solutions LLP',
-            tags: ['Student', 'Counsellor', 'Tags', 'Admission', 'Application Data'],
-            pdfUrl: '/pdf/How to Assign Counsellor and Tags.pdf',
-            pdfFileName: 'How to Assign Counsellor and Tags.pdf',
-            pdfSize: '481 KB'
-          },
           {
             id: 'art-stud-update-details',
             slug: 'how-to-update-student-details',
@@ -132,16 +117,31 @@ export const CATEGORIES: Category[] = [
     title: 'Admission',
     description: 'Online application submission, counseling schedules, document verification, and seat allocation tracking.',
     iconName: 'UserPlus',
-    articleCount: 2,
-    pdfCount: 2,
+    articleCount: 3,
+    pdfCount: 3,
     subcategories: [
       {
         id: 'adm-guides',
         title: 'Admission Registration PDF Guides',
         description: 'Guides on tracking prospectus registration transactions and applicant source data.',
-        articleCount: 2,
-        pdfCount: 2,
+        articleCount: 3,
+        pdfCount: 3,
         articles: [
+          {
+            id: 'art-stud-counsellor-tags',
+            slug: 'how-to-assign-counsellor-and-tags',
+            title: 'How to Assign Counsellor and Tags (COUNSELLOR AND TAGS कैसे ASSIGN करें)',
+            description: 'Official step-by-step guide to assigning counsellors and student tags in Okie Dokie Admission portal.',
+            categoryId: 'admission',
+            subcategoryId: 'adm-guides',
+            readTime: '2 min read',
+            updatedAt: '2026-08-05',
+            author: 'Okie Dokie Solutions LLP',
+            tags: ['Student', 'Counsellor', 'Tags', 'Admission', 'Application Data'],
+            pdfUrl: '/pdf/How to Assign Counsellor and Tags.pdf',
+            pdfFileName: 'How to Assign Counsellor and Tags.pdf',
+            pdfSize: '481 KB'
+          },
           {
             id: 'art-adm-prospectus-transactions',
             slug: 'how-to-check-prospectus-registration-transactions',
