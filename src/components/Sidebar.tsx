@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { CATEGORIES } from '../data/helpData';
 import { Category } from '../types';
 import { DynamicIcon } from './DynamicIcon';
 import { Search, ChevronRight, X, FileText } from 'lucide-react';
+import { useHelpData } from '../contexts/HelpDataContext';
 
 interface SidebarProps {
   activeCategory: Category | null;
@@ -17,9 +17,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isOpen,
   onCloseMobile
 }) => {
+  const { categories } = useHelpData();
   const [sidebarSearch, setSidebarSearch] = useState('');
 
-  const filteredCategories = CATEGORIES.filter(cat =>
+  const filteredCategories = categories.filter(cat =>
     cat.title.toLowerCase().includes(sidebarSearch.toLowerCase()) ||
     cat.description.toLowerCase().includes(sidebarSearch.toLowerCase())
   );

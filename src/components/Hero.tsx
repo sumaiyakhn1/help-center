@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Search, Sparkles, ArrowRight, FileText } from 'lucide-react';
-import { CATEGORIES } from '../data/helpData';
+import { useHelpData } from '../contexts/HelpDataContext';
 import { Article } from '../types';
 import { OkieDokieLogo } from './OkieDokieLogo';
 
@@ -14,12 +14,13 @@ export const Hero: React.FC<HeroProps> = ({
   onSelectArticle,
   onOpenSearch
 }) => {
+  const { categories } = useHelpData();
   const [query, setQuery] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Collect all articles across all 16 categories
-  const allArticles: Article[] = CATEGORIES.flatMap(cat =>
+  // Collect all articles across all categories
+  const allArticles: Article[] = categories.flatMap(cat =>
     cat.subcategories.flatMap(sub => sub.articles)
   );
 

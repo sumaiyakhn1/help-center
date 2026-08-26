@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Send, LifeBuoy, CheckCircle2 } from 'lucide-react';
-import { CATEGORIES } from '../data/helpData';
+import { useHelpData } from '../contexts/HelpDataContext';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -8,6 +8,7 @@ interface ContactModalProps {
 }
 
 export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
+  const { categories } = useHelpData();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -121,11 +122,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                 <div className="space-y-1">
                   <label className="font-semibold text-slate-700">Target Module</label>
                   <select
+                    required
                     value={formData.module}
                     onChange={(e) => setFormData({ ...formData, module: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-orange-500 focus:bg-white rounded-xl px-3 py-2 text-slate-800 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-orange-500 focus:ring-4 focus:ring-orange-500/10 transition-all outline-none text-slate-700 bg-slate-50 focus:bg-white appearance-none"
                   >
-                    {CATEGORIES.map((cat) => (
+                    <option value="">Select a category</option>
+                    {categories.map((cat) => (
                       <option key={cat.id} value={cat.id}>
                         {cat.title}
                       </option>

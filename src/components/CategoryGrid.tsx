@@ -1,14 +1,16 @@
 import React from 'react';
-import { CATEGORIES } from '../data/helpData';
 import { Category } from '../types';
 import { DynamicIcon } from './DynamicIcon';
 import { ArrowRight, FileText, Layers } from 'lucide-react';
+import { useHelpData } from '../contexts/HelpDataContext';
 
 interface CategoryGridProps {
   onSelectCategory: (category: Category) => void;
 }
 
 export const CategoryGrid: React.FC<CategoryGridProps> = ({ onSelectCategory }) => {
+  const { categories } = useHelpData();
+  
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
       {/* Section Header */}
@@ -26,7 +28,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onSelectCategory }) 
 
       {/* 16 Category Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-        {CATEGORIES.map((cat) => (
+        {categories.map((cat) => (
           <div
             key={cat.id}
             onClick={() => onSelectCategory(cat)}

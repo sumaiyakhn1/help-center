@@ -7,11 +7,13 @@ import { CategoryDetail } from './components/CategoryDetail';
 import { ArticleView } from './components/ArticleView';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
-import { CATEGORIES } from './data/helpData';
 import { Category, Article } from './types';
+import { WelcomeView } from './components/WelcomeView';
+import { useHelpData } from './contexts/HelpDataContext';
 
 export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<'home' | 'category' | 'article'>('home');
+  const { categories } = useHelpData();
+  const [currentView, setCurrentView] = useState<'welcome' | 'home' | 'category' | 'article'>('welcome');
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   
@@ -27,7 +29,7 @@ export const App: React.FC = () => {
   const handleSelectArticle = (art: Article) => {
     setActiveArticle(art);
     // Also update active category if needed
-    const cat = CATEGORIES.find(c => c.id === art.categoryId);
+    const cat = categories.find(c => c.id === art.categoryId);
     if (cat) setActiveCategory(cat);
     setCurrentView('article');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,7 +38,7 @@ export const App: React.FC = () => {
   const handleGoHome = () => {
     setActiveCategory(null);
     setActiveArticle(null);
-    setCurrentView('home');
+    setCurrentView('welcome');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -48,21 +50,28 @@ export const App: React.FC = () => {
         onGoHome={handleGoHome}
         onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
         isSidebarOpen={isSidebarOpen}
+        showSidebarToggle={currentView !== 'welcome'}
       />
 
       {/* Main Layout with Persistent Sidebar */}
       <div className="flex-1 flex max-w-[1600px] w-full mx-auto relative">
         
         {/* Sidebar Component */}
-        <Sidebar
-          activeCategory={activeCategory}
-          onSelectCategory={handleSelectCategory}
-          isOpen={isSidebarOpen}
-          onCloseMobile={() => setIsSidebarOpen(false)}
-        />
+        {currentView !== 'welcome' && (
+          <Sidebar
+            activeCategory={activeCategory}
+            onSelectCategory={handleSelectCategory}
+            isOpen={isSidebarOpen}
+            onCloseMobile={() => setIsSidebarOpen(false)}
+          />
+        )}
 
         {/* Dynamic Main View Area */}
-        <main className="flex-1 min-w-0 transition-all duration-300">
+        <main className={`flex-1 min-w-0 transition-all duration-300 ${currentView === 'welcome' ? 'flex flex-col' : ''}`}>
+          {currentView === 'welcome' && (
+            <WelcomeView onEnterHelpCenter={() => setCurrentView('home')} />
+          )}
+
           {currentView === 'home' && (
             <div className="space-y-4">
               {/* Hero Banner with Live Search */}
@@ -80,14 +89,14 @@ export const App: React.FC = () => {
             <CategoryDetail
               category={activeCategory}
               onSelectArticle={handleSelectArticle}
-              onGoHome={handleGoHome}
+              onGoHome={() => setCurrentView('home')}
             />
           )}
 
           {currentView === 'article' && activeArticle && (
             <ArticleView
               article={activeArticle}
-              onGoHome={handleGoHome}
+              onGoHome={() => setCurrentView('home')}
               onSelectCategory={handleSelectCategory}
               onSelectArticle={handleSelectArticle}
             />

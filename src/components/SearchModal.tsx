@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Search, X, FileText, Clock, ArrowRight } from 'lucide-react';
-import { CATEGORIES } from '../data/helpData';
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, X, FileText, Clock, ArrowRight, ChevronRight, CornerDownLeft } from 'lucide-react';
+import { useHelpData } from '../contexts/HelpDataContext';
 import { Article } from '../types';
 
 interface SearchModalProps {
@@ -14,10 +14,13 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   onClose,
   onSelectArticle
 }) => {
+  const { categories } = useHelpData();
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Collect all articles across all 16 categories
-  const allArticles: Article[] = CATEGORIES.flatMap(cat =>
+  // Collect all articles across all categories
+  const allArticles: Article[] = categories.flatMap(cat =>
     cat.subcategories.flatMap(sub => sub.articles)
   );
 
