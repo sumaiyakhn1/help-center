@@ -100,7 +100,7 @@ const mergeDataWithCategories = (rows: SheetRow[]): Category[] => {
 
     // Update category counts
     category.articleCount = category.subcategories.reduce((sum, sub) => sum + sub.articleCount, 0);
-    category.pdfCount = category.subcategories.reduce((sum, sub) => sum + sub.pdfCount, 0);
+    category.pdfCount = category.subcategories.reduce((sum, sub) => sum + (sub.pdfCount || 0), 0);
   });
 
   return updatedCategories;
