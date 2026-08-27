@@ -1,81 +1,106 @@
 import React from 'react';
-import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle } from 'lucide-react';
+import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle, ClipboardList, Plane, ArrowRight } from 'lucide-react';
 
 interface WelcomeViewProps {
   onEnterHelpCenter: () => void;
 }
 
 export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) => {
+  
+  // Duo-tone pastel theme configuration
+  const themeOrange = {
+    bg: 'bg-[#FFF5F0]',
+    hover: 'hover:bg-[#FFE6D5]',
+    border: 'border-[#FFE6D5]',
+    iconColor: 'text-[#E07040]',
+    iconBg: 'bg-[#FFE6D5]',
+    arrowColor: 'text-[#E07040]'
+  };
+
+  const themeBlue = {
+    bg: 'bg-[#F2F7FD]',
+    hover: 'hover:bg-[#E1EDFA]',
+    border: 'border-[#E1EDFA]',
+    iconColor: 'text-[#5A8BB8]',
+    iconBg: 'bg-[#E1EDFA]',
+    arrowColor: 'text-[#5A8BB8]'
+  };
+
   const links = [
     {
       id: 'help-center',
-      title: 'Help Center',
-      description: 'Access guides, FAQs, and support documents',
-      icon: <HelpCircle className="w-8 h-8 text-orange-500" />,
+      title: 'Help & Support',
+      description: 'Access step-by-step guides, FAQs, and instant support for all your needs.',
+      icon: <HelpCircle className={`w-8 h-8 ${themeOrange.iconColor}`} />,
       url: '#',
       onClick: onEnterHelpCenter,
-      bgClass: 'bg-orange-50',
-      borderClass: 'border-orange-200 hover:border-orange-400',
+      theme: themeOrange
     },
     {
       id: 'module-learn',
-      title: 'Learn Module',
-      description: 'Educational resources and learning platform',
-      icon: <BookOpen className="w-8 h-8 text-indigo-500" />,
+      title: 'Learning Portal',
+      description: 'Dive into your digital classroom. Access video modules and study materials.',
+      icon: <BookOpen className={`w-8 h-8 ${themeBlue.iconColor}`} />,
       url: 'https://odted.vercel.app/learn',
-      bgClass: 'bg-indigo-50',
-      borderClass: 'border-slate-200 hover:border-indigo-400',
+      theme: themeBlue
+    },
+    {
+      id: 'travel',
+      title: 'Travel & Expenses',
+      description: 'Submit travel requests, manage expenses, and track your reimbursements.',
+      icon: <Plane className={`w-8 h-8 ${themeBlue.iconColor}`} />,
+      url: 'https://people.zoho.in/60034133438/zp#travel/travelexpenses/listview',
+      theme: themeBlue
     },
     {
       id: 'module-mom',
-      title: 'Mom Portal',
-      description: 'Parenting and family support systems',
-      icon: <Baby className="w-8 h-8 text-pink-500" />,
+      title: 'MOM Maker',
+      description: 'Easily create and manage official Minutes of Meeting and key action items.',
+      icon: <ClipboardList className={`w-8 h-8 ${themeOrange.iconColor}`} />,
       url: 'https://odmom.lovable.app/',
-      bgClass: 'bg-pink-50',
-      borderClass: 'border-slate-200 hover:border-pink-400',
+      theme: themeOrange
     },
     {
       id: 'module-cab',
-      title: 'Cab Booking',
-      description: 'Book your ride quickly and easily',
-      icon: <Car className="w-8 h-8 text-yellow-500" />,
+      title: 'Transport Booking',
+      description: 'Plan your daily commute effortlessly. Book rides and track your vehicle.',
+      icon: <Car className={`w-8 h-8 ${themeBlue.iconColor}`} />,
       url: 'https://odcab.lovable.app/',
-      bgClass: 'bg-yellow-50',
-      borderClass: 'border-slate-200 hover:border-yellow-400',
-    },
-    {
-      id: 'kpi',
-      title: 'KPI Dashboard',
-      description: 'Key performance metrics and analytics',
-      icon: <TrendingUp className="w-8 h-8 text-green-500" />,
-      url: '#',
-      bgClass: 'bg-green-50',
-      borderClass: 'border-slate-200 hover:border-green-400',
+      theme: themeBlue
     },
     {
       id: 'utility-1',
-      title: 'Utilities',
-      description: 'Access system tools and configurations',
-      icon: <PenTool className="w-8 h-8 text-blue-500" />,
+      title: 'Utility',
+      description: 'Helpful apps and tools that reduce your daily workload.',
+      icon: <PenTool className={`w-8 h-8 ${themeOrange.iconColor}`} />,
       url: 'https://okiedokie-utilities.vercel.app/',
-      bgClass: 'bg-blue-50',
-      borderClass: 'border-slate-200 hover:border-blue-400',
+      theme: themeOrange
+    },
+    {
+      id: 'onboarding-handbook',
+      title: 'New Staff Guide',
+      description: 'Welcome to the team! Find everything you need to know about your new workplace.',
+      icon: <BookOpen className={`w-8 h-8 ${themeBlue.iconColor}`} />,
+      url: '/Employee_Onboarding_Handbook.pdf',
+      theme: themeBlue
     }
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] w-full py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 to-slate-100">
-      <div className="text-center max-w-3xl mx-auto mb-12">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-          Welcome to Campus Automation Partner
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#FFFCFA]">
+      <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="inline-block px-5 py-2 rounded-full bg-[#FFF5F0] text-[#E07040] font-bold text-sm tracking-widest uppercase mb-6 border border-[#FFE6D5]">
+          Campus Automation Partner
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-800 tracking-tight mb-5">
+          Welcome to Your Hub
         </h1>
-        <p className="text-lg text-slate-600">
-          Select a portal below to access your integrated modules, utilities, and support resources.
+        <p className="text-lg text-slate-500 font-medium max-w-2xl mx-auto leading-relaxed">
+          Your central portal to manage daily campus activities, access resources, and stay connected.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl w-full mx-auto">
         {links.map((link) => (
           <a
             key={link.id}
@@ -88,17 +113,23 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
             }}
             target={link.url !== '#' ? '_blank' : '_self'}
             rel="noopener noreferrer"
-            className={`group relative bg-white rounded-3xl p-8 border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 flex flex-col items-center text-center ${link.borderClass}`}
+            className={`group relative rounded-[2rem] p-8 border ${link.theme.bg} ${link.theme.border} ${link.theme.hover} transition-all duration-300 hover:-translate-y-1.5 flex flex-col text-left overflow-hidden shadow-sm hover:shadow-md`}
           >
-            <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${link.bgClass} transition-transform duration-300 group-hover:scale-110 mb-6`}>
-              {link.icon}
+            <div className="flex justify-between items-start mb-6 relative z-10">
+              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${link.theme.iconBg} transition-transform duration-300 group-hover:scale-105`}>
+                {link.icon}
+              </div>
+              <ArrowRight className={`w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ${link.theme.arrowColor}`} />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
-              {link.title}
-            </h3>
-            <p className="text-sm text-slate-500 leading-relaxed">
-              {link.description}
-            </p>
+            
+            <div className="relative z-10 flex-1 flex flex-col mt-2">
+              <h3 className="font-bold text-slate-800 text-xl mb-3 transition-colors group-hover:text-slate-900">
+                {link.title}
+              </h3>
+              <p className="text-slate-600 leading-relaxed text-sm font-medium">
+                {link.description}
+              </p>
+            </div>
           </a>
         ))}
       </div>

@@ -124,6 +124,19 @@ export const Hero: React.FC<HeroProps> = ({
           )}
         </div>
 
+        {/* Quick Links */}
+        <div className="pt-6 z-20 flex flex-wrap justify-center gap-3 relative">
+          <a
+            href="/Employee_Onboarding_Handbook.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 border border-slate-200 rounded-full text-sm font-medium text-slate-700 hover:text-orange-600 hover:border-orange-300 hover:bg-orange-50 transition-colors shadow-sm"
+          >
+            <FileText className="w-4 h-4 text-orange-500" />
+            <span>Employee Onboarding Handbook</span>
+          </a>
+        </div>
+
       </div>
     </section>
   );
