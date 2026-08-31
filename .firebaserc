@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "sumaiya-project1"
-  }
+  },
+  "targets": {
+    "sumaiya-project1": {
+      "hosting": {
+        "help-center": [
+          "okiedokie-helpcenter"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

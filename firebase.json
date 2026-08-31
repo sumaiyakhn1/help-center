@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "help-center",
     "public": "dist",
     "ignore": [
       "firebase.json",
