@@ -23,13 +23,23 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
   // PDF or Canva link
   let pdfUrl = article.pdfUrl || '/pdf/How_To_Assign_Counsellor_and_Tags.pdf';
   const pdfFileName = article.pdfFileName || 'How_To_Assign_Counsellor_and_Tags.pdf';
-  const isCanvaLink = pdfUrl.includes('canva.com');
+  const isCanvaLink = pdfUrl.includes('canva.com') || pdfUrl.includes('canva.link') || pdfUrl.includes('canva.site');
   
   // Cleanly format Canva links for embedding
-  if (isCanvaLink && !pdfUrl.includes('embed')) {
-    const separator = pdfUrl.includes('?') ? '&' : '?';
-    pdfUrl = `${pdfUrl}${separator}embed`;
+  if (isCanvaLink) {
+    try {
+      const urlObj = new URL(pdfUrl);
+      // Canva requires the embed param directly. Strip tracking params that break iframes.
+      urlObj.search = '?embed';
+      pdfUrl = urlObj.toString();
+    } catch (e) {
+      if (!pdfUrl.includes('embed')) {
+        pdfUrl = `${pdfUrl.split('?')[0]}?embed`;
+      }
+    }
   }
+
+  console.log('Final Canva iframe URL:', pdfUrl);
 
   return (
     <div className="py-6 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-6">
@@ -114,6 +124,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
             title={article.title}
             className="w-full h-[850px] rounded-2xl border-none"
             allowFullScreen
+            allow="fullscreen"
           />
         ) : (
           <object
