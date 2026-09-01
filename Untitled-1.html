@@ -1,0 +1,251 @@
+<div class="container-fluid">
+    <div style="font-size: large; font-weight: 700;" class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <img class="hW100px img-rounded" [src]="displayData.logo" alt="">
+                </div>
+                <div class="col-8 textCenter ">
+                    <h1>{{displayData.entityDisplayName}}</h1>
+                    <span>{{displayData.entityAddress}}, {{displayData.entityCity}}, {{displayData.entityState}},
+                        {{displayData.entityPin}} </span> <br>
+                    <span>{{displayData.entityReceptionNumber}}, {{displayData.entityContactEmail}} </span>
+                </div>
+            </div>
+            <div class="row m0 borderSolid">
+                <div class="col-12 textCenter borderBottom">
+                    <mat-label> <strong> Fee Receipt ({{displayData.session}}) </strong> </mat-label>
+                </div>
+                <div class="col-7 ">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6 p0">
+                                <strong> Receipt No </strong>
+                            </div>
+                            <div class="col-6 p0">
+                                <span> : {{displayData.receiptId}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 p0">
+                                <strong> {{displayData.displayNamesRegNo}} </strong>
+                            </div>
+                            <div class="col-6 p0">
+                                <span> : {{displayData.studentRegNo}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 p0">
+                                <strong> Student's Name </strong>
+                            </div>
+                            <div class="col-6 p0">
+                                <span> : {{displayData.studentName}} </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 p0">
+                                <strong> Father's Name </strong>
+                            </div>
+                            <div class="col-6 p0">
+                                <span> : {{displayData.studentFatherName}} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 ">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-5 p0">
+                                <strong>Date</strong>
+                            </div>
+                            <div class="col-7 p0">
+                                : {{displayData.date | date: 'dd/MM/yyyy'}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 p0">
+                                <strong> Contact </strong>
+                            </div>
+                            <div class="col-7 p0">
+                                : {{displayData.studentPhone}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 p0">
+                                <strong> {{displayData.displayNamesCourse}} </strong>
+                            </div>
+                            <div class="col-7 p0">
+                                : {{displayData.studentCourse}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 p0">
+                                <strong> Section</strong>
+                            </div>
+                            <div class="col-7 p0">
+                                : {{displayData.studentSection}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!hasError" class="">
+                <table class="table fontFamily mt3p">
+                    <thead class="borderS1P mt3p">
+                        <th style="font-size:17px;font-weight:700;">
+                            S.No
+                        </th>
+                        <th style="font-size:17px;font-weight:700;">
+                            Fee Head
+                        </th>
+                        <th style="font-size:17px;font-weight:700;">
+                            Installment
+                        </th>
+                        <th style="font-size:17px;font-weight:700;">
+                            Payable Amount
+                        </th>
+                        <th style="font-size:17px;font-weight:700;">
+                            Paid Amount
+                        </th>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let row of displayData.feeGroupHeadObj; let i = index">
+                            <tr>
+                                <td>
+                                    &bull;
+                                </td>
+                                <td>
+                                    {{row.name}}
+                                </td>
+                                <td>
+                                    {{row.installment}}
+                                </td>
+                                <td>
+                                    <div *ngIf="row.payableAmount !=0">
+                                        {{row.payableAmount | number : '1.2-2' }}
+                                    </div>
+                                    <div *ngIf="row.payableAmount ==0">
+                                        NA
+                                    </div>
+                                </td>
+                                <td>
+                                    {{row.paidAmount | number : '1.2-2'}}
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <ng-container *ngFor="let row of displayData.dataSource.data; let i = index">
+                            <tr
+                                *ngIf="['University Alumni Fee', 'Student Activity', 'University Registration', 'University Continuation', 'Uni. Sports Fee', 'Uni. Youth Welfare Fee', 'Uni. Holiday Home Fee', 'Uni. Exam Fee', 'Red Cross Fee', 'NSS Fee', 'Development Fee', 'Dr. Radha Krishan Memorial Fund', 'Curriculum Development', 'NEP Exam & Other Fee'].includes(row.feeHead)">
+                                <td>
+                                    &bull;
+                                </td>
+                                <td>
+                                    {{row.feeHead}}
+                                </td>
+                                <td>
+                                    {{row.installment}}
+                                </td>
+                                <td>
+                                    <div *ngIf="row.payableAmount !=0">
+                                        {{row.payableAmount | number : '1.2-2' }}
+                                    </div>
+                                    <div *ngIf="row.payableAmount ==0">
+                                        NA
+                                    </div>
+                                </td>
+                                <td>
+                                    {{row.paidAmount | number : '1.2-2'}}
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+                <div class="colorBlackDark">
+                    <div class="row">
+                        <div class="col-7 ">
+                            Payment Mode
+                        </div>
+                        <div class="col-1 ">
+                            :
+                        </div>
+                        <div class="col-4 textEnd ">
+                            {{displayData.paymentDetailsPaymentMode}}
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                  <div class="col-7 ">
+                    Instrument Date
+                  </div>
+                  <div class="col-1 ">
+                    :
+                  </div>
+                  <div class="col-4 textEnd ">
+                    {{displayData.paymentDetailsDate | date: 'dd/MM/yyyy'}}
+                  </div>
+                  </div>-->
+                    <div class="row">
+                        <div class="col-7 ">
+                            Ref/Chq. Number
+                        </div>
+                        <div class="col-1 ">
+                            :
+                        </div>
+                        <div class="col-4 textEnd ">
+                            {{displayData.paymentDetailsRefId}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7 ">
+                            Total Invoice
+                        </div>
+                        <div class="col-1 ">
+                            :
+                        </div>
+                        <div class="col-4 textEnd ">
+                            {{displayData.totalPaybleAmount | number : '1.2-2' }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7 ">
+                            Net Paid Amount
+                        </div>
+                        <div class="col-1 ">
+                            :
+                        </div>
+                        <div class="col-4 textEnd">
+                            {{displayData.totalPaidAmount | number : '1.2-2' }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            Balance Due
+                        </div>
+                        <div class="col-1 ">
+                            :
+                        </div>
+                        <div class="col-4 textEnd  ">
+                            {{displayData.balance | number : '1.2-2' }}
+                        </div>
+                    </div>
+                </div>
+                <div class="kt-space-20"></div>
+                <div class="kt-space-20"></div>
+                <div class="row justifyFlexEnd m0">
+                    <div class="col-12">
+                        <strong>Remarks :</strong>
+                        {{displayData.remark}}
+                    </div>
+                    <div class="col-8">
+                        <strong> Amount in Words: </strong>
+                        Rs {{displayData.totalPaidAmountWords.toUpperCase()}} ONLY
+                    </div>
+                    <div class="col-4 p0">
+                        <label>Fees Clerk/Accountant</label>
+                    </div>
+                </div>
+                <div class="kt-space-20"></div>
+                <div class="kt-space-20"></div>
+            </div>
+        </div>
+    </div>
+</div>

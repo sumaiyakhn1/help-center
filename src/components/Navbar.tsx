@@ -19,7 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const howToUseItems = [
     { intent: 'Learn about the company and how we work', goto: 'New Staff Guide' },
-    { intent: 'Learn how to use an ERP module', goto: 'Modules' },
+    { intent: 'Learn how to use an ERP module', goto: 'ERP User Manual' },
     { intent: 'Complete training or watch learning material', goto: 'Learning Portal' },
     { intent: 'Submit or track expenses', goto: 'Travel & Expenses' },
     { intent: 'Create Minutes of Meeting', goto: 'MOM Maker' },
@@ -35,10 +35,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header className="sticky top-0 z-40 w-full bg-[#f96424] text-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 grid grid-cols-3 items-center">
         
-        {/* Left Section: Back Button + Mobile Toggle + Okie Dokie Logo */}
-        <div className="flex items-center gap-3">
+        {/* Left Section: Back Button + Mobile Toggle + Help Center Home */}
+        <div className="flex items-center gap-3 justify-start">
           {showSidebarToggle && (
             <button
               onClick={onGoHome}
@@ -62,18 +62,28 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onGoHome}
-            className="flex items-center gap-3 text-left focus:outline-none cursor-pointer"
+            className="flex items-center text-left focus:outline-none cursor-pointer"
+            title="Help Center Home"
           >
-            <OkieDokieLogo variant="header" />
-
-            <span className="hidden sm:inline font-extrabold text-base tracking-tight text-white border-l border-white/30 pl-3">
+            <span className="font-extrabold text-base tracking-tight text-white hover:text-white/90 transition-colors">
               Help Center
             </span>
           </button>
         </div>
 
+        {/* Center Section: Okie Dokie Logo */}
+        <div className="flex justify-center items-center">
+          <button
+            onClick={onGoHome}
+            className="focus:outline-none cursor-pointer flex items-center hover:opacity-90 transition-opacity"
+            title="Go to Home"
+          >
+            <OkieDokieLogo variant="header" />
+          </button>
+        </div>
+
         {/* Right Section: Help / How to Use */}
-        <div className="flex items-center">
+        <div className="flex justify-end items-center">
           <button
             onClick={() => setShowHowToUseModal(true)}
             className="p-2 rounded-full text-white hover:bg-white/20 transition-colors focus:outline-none cursor-pointer"

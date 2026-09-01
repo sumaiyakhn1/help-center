@@ -95,7 +95,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
         <div className="flex items-center gap-2 flex-shrink-0">
           {isCanvaLink ? (
             <a
-              href={pdfUrl}
+              href={article.pdfUrl || pdfUrl.replace('?embed', '')}
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer hover:shadow-lg"

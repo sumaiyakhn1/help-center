@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle, ClipboardList, Plane, ArrowRight, HeartPulse, X, PhoneCall, Users } from 'lucide-react';
+import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle, ClipboardList, Plane, ArrowRight, HeartPulse, X, PhoneCall, Users, Gift, Play, Calendar, MonitorPlay } from 'lucide-react';
 
 interface WelcomeViewProps {
   onEnterHelpCenter: () => void;
@@ -9,6 +9,27 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
   const [showHandbookModal, setShowHandbookModal] = useState(false);
   const [showInsuranceModal, setShowInsuranceModal] = useState(false);
   const [showFormsModal, setShowFormsModal] = useState(false);
+  const [showCelebrationsModal, setShowCelebrationsModal] = useState(false);
+  const [celebrationView, setCelebrationView] = useState<'choice' | 'videos'>('choice');
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  const celebrations = [
+    { date: '22/7/2026', name: 'Palak', type: 'Birthday', year: '2026', link: 'https://drive.google.com/file/d/1MV-ITKAy-ySMeeKGFHF71cOPmp_85s5J/preview' },
+    { date: '8/6/2026', name: 'Gobind', type: 'Birthday', year: '2026', link: 'https://drive.google.com/file/d/1l5jocDBNgqUu2Vg4sEp9hi5au3WdqLVN/preview' },
+    { date: '15/5/2026', name: 'Sultan', type: 'Birthday', year: '2026', link: 'https://drive.google.com/file/d/1Spx7_tCfcNWH_1T83pv8NLzh47GSWxGr/preview' },
+    { date: '13/3/2026', name: 'Sukhmeet & Shobhit', type: 'Anniversary', year: '2026', link: 'https://drive.google.com/file/d/164pmVd1v8-TESSbEQoJLEN_P9Pj8-9yI/preview' },
+    { date: '10/12/2025', name: 'Rahul', type: 'Birthday', year: '2025', link: 'https://drive.google.com/file/d/15SJJYOmaLgvk9SxcTR4wO4fX_pvSVF9v/preview' },
+    { date: '28/10/2025', name: 'Sumaiya', type: 'Birthday', year: '2025', link: 'https://drive.google.com/file/d/1A54vLjkUO2C1Vxux2e-oGhNm3nj-qqT7/preview' },
+    { date: '9/7/2025', name: 'Shobhit', type: 'Birthday', year: '2025', link: 'https://drive.google.com/file/d/1ai66vumn3VZUZx5NEBlo_dkFo-yyUjrj/preview' },
+  ];
+
+  const gradients = [
+    'bg-gradient-to-br from-pink-500 to-orange-400',
+    'bg-gradient-to-br from-blue-500 to-cyan-400',
+    'bg-gradient-to-br from-purple-500 to-indigo-400',
+    'bg-gradient-to-br from-emerald-500 to-teal-400',
+    'bg-gradient-to-br from-amber-500 to-orange-400',
+  ];
 
   // Duo-tone pastel theme configuration
   const themeOrange = {
@@ -41,7 +62,7 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
     },
     {
       id: 'help-center',
-      title: 'Modules',
+      title: 'ERP User Manual',
       description: 'ERP modules step-by-step guide and FAQs.',
       icon: <HelpCircle className={`w-8 h-8 ${themeOrange.iconColor}`} />,
       url: '#',
@@ -112,6 +133,23 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
       icon: <HeartPulse className={`w-8 h-8 ${themeBlue.iconColor}`} />,
       url: '#',
       onClick: () => setShowInsuranceModal(true),
+      theme: themeBlue
+    },
+    {
+      id: 'celebrations',
+      title: 'Celebrations',
+      description: 'Watch birthday and anniversary celebration videos of our team members.',
+      icon: <Gift className={`w-8 h-8 ${themeOrange.iconColor}`} />,
+      url: '#',
+      onClick: () => setShowCelebrationsModal(true),
+      theme: themeOrange
+    },
+    {
+      id: 'webinars',
+      title: 'Webinars',
+      description: 'Watch and access recorded webinar sessions.',
+      icon: <MonitorPlay className={`w-8 h-8 ${themeBlue.iconColor}`} />,
+      url: 'https://ted.oderp.in/webinar',
       theme: themeBlue
     }
   ];
@@ -283,6 +321,113 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
                 className="w-full h-full rounded-xl border-0 shadow-inner bg-white"
                 title="Employee Onboarding Handbook"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Celebrations Modal */}
+      {showCelebrationsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-5xl h-[85vh] flex flex-col relative overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            
+            <div className="flex justify-between items-center p-6 border-b border-slate-100">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-pink-600">
+                  <Gift className="w-6 h-6" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-slate-800">Team Celebrations</h2>
+                  <p className="text-sm text-slate-500">Birthdays, anniversaries and special moments.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                {celebrationView === 'videos' && (
+                  <button 
+                    onClick={() => {
+                      if (selectedVideo) setSelectedVideo(null);
+                      else setCelebrationView('choice');
+                    }}
+                    className="text-sm font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2.5 rounded-xl transition-colors"
+                  >
+                    {selectedVideo ? 'Back to Gallery' : 'Back to Options'}
+                  </button>
+                )}
+                <button 
+                  onClick={() => { setShowCelebrationsModal(false); setSelectedVideo(null); setCelebrationView('choice'); }}
+                  className="text-slate-400 hover:text-slate-600 transition-colors p-2 hover:bg-slate-100 rounded-full"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            
+            <div className={`flex-1 overflow-y-auto bg-slate-50/50 p-6 ${celebrationView === 'choice' ? 'flex items-center justify-center' : ''}`}>
+              {celebrationView === 'choice' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto w-full">
+                  <a
+                    href="https://okie-dokie-birthday-wall.web.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center justify-center text-center p-10 bg-white rounded-[2rem] shadow-sm hover:shadow-xl border border-slate-200 transition-all duration-300 hover:-translate-y-2"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 mb-5 group-hover:scale-110 transition-transform">
+                      <PenTool className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-extrabold text-slate-800 mb-3">Add a Wish</h3>
+                    <p className="text-slate-500 text-sm max-w-[16rem]">Write a beautiful message for your colleagues on their special day.</p>
+                  </a>
+                  
+                  <button
+                    onClick={() => setCelebrationView('videos')}
+                    className="group flex flex-col items-center justify-center text-center p-10 bg-white rounded-[2rem] shadow-sm hover:shadow-xl border border-slate-200 transition-all duration-300 hover:-translate-y-2 focus:outline-none"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 mb-5 group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8" />
+                    </div>
+                    <h3 className="text-xl font-extrabold text-slate-800 mb-3">Watch Videos</h3>
+                    <p className="text-slate-500 text-sm max-w-[16rem]">Relive the wonderful moments from past birthday and anniversary celebrations.</p>
+                  </button>
+                </div>
+              ) : selectedVideo ? (
+                <iframe 
+                  src={selectedVideo} 
+                  className="w-full h-full rounded-2xl border border-slate-200 shadow-sm bg-white"
+                  allow="autoplay"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {celebrations.map((c, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setSelectedVideo(c.link)}
+                      className="group text-left bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                    >
+                      <div className={`h-48 w-full relative flex flex-col items-center justify-center text-white ${gradients[i % gradients.length]}`}>
+                         <Gift className="w-12 h-12 mb-3 opacity-90" />
+                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                           <div className="w-14 h-14 rounded-full bg-white/90 shadow-lg flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300">
+                              <Play className="w-6 h-6 text-slate-800 ml-1" />
+                           </div>
+                         </div>
+                      </div>
+                      <div className="p-5">
+                         <div className="flex items-center justify-between mb-2">
+                           <span className={`text-xs font-bold px-2.5 py-1 rounded-lg ${c.type === 'Birthday' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}`}>
+                             {c.type}
+                           </span>
+                           <span className="text-sm font-semibold text-slate-500">{c.year}</span>
+                         </div>
+                         <h3 className="font-bold text-lg text-slate-800 group-hover:text-orange-600 transition-colors mb-1">{c.name}</h3>
+                         <p className="text-sm text-slate-500 flex items-center gap-2">
+                            <Calendar className="w-4 h-4" /> {c.date}
+                         </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
