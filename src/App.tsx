@@ -7,6 +7,7 @@ import { CategoryDetail } from './components/CategoryDetail';
 import { ArticleView } from './components/ArticleView';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
+import { VisitorCounter } from './components/VisitorCounter';
 import { Category, Article } from './types';
 import { WelcomeView } from './components/WelcomeView';
 import { useHelpData } from './contexts/HelpDataContext';
@@ -106,6 +107,9 @@ export const App: React.FC = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Visitor Counter */}
+      <VisitorCounter />
 
       {/* Modals & Overlays */}
       <SearchModal

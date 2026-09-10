@@ -1,0 +1,588 @@
+<style>
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .logo {
+        width: 90px;
+    }
+
+    .university-name h1 {
+        margin: 0;
+        font-size: 70px;
+        color: #3c4d7c;
+        line-height: 60px;
+    }
+
+    .university-name h2 {
+        margin: 0;
+        font-size: 45px;
+        color: #3c4d7c;
+        font-weight: normal;
+    }
+
+    .university-address {
+        margin-top: 12px;
+        font-size: 18px;
+        color: #444;
+    }
+
+    /* HEADER 2 */
+
+    .header2 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 25px;
+        font-size: 18px;
+    }
+
+    .header2-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    .header2 strong {
+        font-size: 26px;
+        color: #000;
+    }
+
+    .header2 span {
+        font-size: 24px;
+        color: #333;
+    }
+
+    /* TABLE */
+
+    .result-container {
+        width: 100%;
+        overflow-x: scroll;
+        font-family: Arial, sans-serif;
+        color: #000;
+        overflow-y: hidden;
+    }
+
+    .result-table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: max-content;
+    }
+
+    .result-table th,
+    .result-table td {
+        border: 1px solid #d0d0d0;
+        padding: 4px 6px;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 12px;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .result-table thead th {
+        background: white;
+        font-weight: 600;
+        color: black;
+    }
+
+    .subject-header {
+        background: white;
+        color: black;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 10px 6px;
+    }
+
+    /* FIX - width + min-width + max-width + !important sabhi column classes pe */
+
+    .subject-subhead {
+        width: 58px !important;
+        min-width: 58px !important;
+        max-width: 58px !important;
+        font-size: 11px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 4px !important;
+    }
+
+    .subject-mark {
+        width: 65px !important;
+        min-width: 65px !important;
+        max-width: 65px !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 4px !important;
+    }
+
+    .total-cell {
+        width: 65px !important;
+        min-width: 65px !important;
+        max-width: 65px !important;
+        background: white;
+        font-weight: bold;
+        overflow: hidden;
+        padding: 4px !important;
+    }
+
+    .grade-cell {
+        width: 58px !important;
+        min-width: 58px !important;
+        max-width: 58px !important;
+        color: black;
+        font-weight: bold;
+        overflow: hidden;
+        padding: 4px !important;
+    }
+
+    /* COLUMN WIDTH */
+
+    .result-table th:nth-child(1),
+    .result-table td:nth-child(1) {
+        min-width: 40px;
+    }
+
+    .result-table th:nth-child(2),
+    .result-table td:nth-child(2) {
+        min-width: 120px;
+    }
+
+    .result-table th:nth-child(3),
+    .result-table td:nth-child(3) {
+        min-width: 140px;
+    }
+
+    .result-table th:nth-child(4),
+    .result-table td:nth-child(4) {
+        min-width: 140px;
+    }
+
+    .result-table th:nth-child(5),
+    .result-table td:nth-child(5) {
+        min-width: 140px;
+    }
+
+    .result-table th:nth-child(6),
+    .result-table td:nth-child(6) {
+        min-width: 90px;
+    }
+
+    /* STUDENT NAME */
+
+    .student-name {
+        margin-top: 4px;
+        font-size: 14px;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #fafafa;
+    }
+
+    tbody tr:hover {
+        background: #f1f8f1;
+    }
+
+    @media print {
+        .result-container {
+            overflow: visible;
+        }
+    }
+</style>
+
+
+<!-- MAIN LOOP -->
+
+<div *ngFor="let displayData of displayDataArray">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo-section">
+
+            <img [src]="displayData.logo" class="logo">
+
+            <div class="university-name">
+
+                <h1>
+                    {{ displayData.entityDisplayName.split(' ')[0] }}
+                </h1>
+
+                <h2>
+                    {{ displayData.entityDisplayName.split(' ').slice(1).join(' ') }}
+                </h2>
+
+            </div>
+
+        </div>
+
+        <!-- ADDRESS -->
+
+        <div class="university-address">
+
+            {{ displayData.entityAddress }},
+            {{ displayData.entityCity }},
+            {{ displayData.entityState }}
+            - {{ displayData.entityPin }}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HEADER 2 -->
+
+    <div class="header2">
+
+        <!-- ROW 1 -->
+
+        <div class="header2-row">
+
+            <span>
+                <strong>Session :</strong>
+                {{ displayData.session }}
+            </span>
+
+            <span>
+                <strong>School Name :</strong>
+                {{ displayData.examMaster.course }}
+            </span>
+
+        </div>
+
+        <!-- ROW 2 -->
+
+        <div class="header2-row">
+
+            <span>
+                <strong>Course :</strong>
+                {{ displayData.metadata.stream }}
+            </span>
+
+            <span>
+                <strong>Semester :</strong>
+                {{ displayData.examMaster.batch }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- TABLE -->
+
+    <div class="result-container">
+
+        <table class="result-table">
+
+            <thead>
+
+                <!-- HEADER -->
+
+                <tr>
+
+                    <th rowspan="2">S.No</th>
+
+                    <th rowspan="2">
+                        University <br> Roll No
+                    </th>
+
+                    <th rowspan="2">
+                        Student Name
+                    </th>
+
+                    <th rowspan="2">
+                        Father Name
+                    </th>
+
+                    <th rowspan="2">
+                        Mother Name
+                    </th>
+
+                    <th rowspan="2">
+                        Appar ID
+                    </th>
+
+                    <th rowspan="2">
+                        Aadhar Card
+                    </th>
+
+                    <!-- SUBJECTS -->
+
+                    <ng-container *ngFor="let subject of displayData.examMaster.subjects">
+
+                        <th colspan="9" class="subject-header">
+                            {{ subject.subjectName }}
+                            ({{ subject.subjectCode }})
+                        </th>
+
+                    </ng-container>
+
+                    <th rowspan="2">
+                        Total Earned Credits
+                    </th>
+
+                    <th rowspan="2">
+                        Total Grade
+                    </th>
+
+                    <th rowspan="2">
+                        SGPA
+                    </th>
+
+                    <th rowspan="2">
+                        Signature
+                    </th>
+
+                </tr>
+
+
+                <!-- SUB HEADER -->
+
+                <tr>
+
+                    <ng-container *ngFor="let subject of displayData.examMaster.subjects">
+
+                        <th class="subject-subhead">
+                            Internal
+                            <ng-container
+                                *ngIf="subject.internalMaxMarks || displayData.students[0]?.subjectMap[subject.subjectCode]?.internalMaxMarks as intMax">
+                                <br>({{ intMax }})
+                            </ng-container>
+                        </th>
+
+                        <th class="subject-subhead">
+                            External
+                            <ng-container
+                                *ngIf="subject.externalMaxMarks || displayData.students[0]?.subjectMap[subject.subjectCode]?.externalMaxMarks as extMax">
+                                <br>({{ extMax }})
+                            </ng-container>
+                        </th>
+                        <th class="subject-subhead">
+                            Grace
+                        </th>
+
+                        <th class="subject-subhead">
+                            Total
+                            <ng-container
+                                *ngIf="(subject.maxMarks || displayData.students[0]?.subjectMap[subject.subjectCode]?.maxMarks || (+(subject.internalMaxMarks || displayData.students[0]?.subjectMap[subject.subjectCode]?.internalMaxMarks || 0) + +(subject.externalMaxMarks || displayData.students[0]?.subjectMap[subject.subjectCode]?.externalMaxMarks || 0))) as totMax">
+                                <br>({{ totMax }})
+                            </ng-container>
+                        </th>
+
+                        <th class="subject-subhead">
+                            Total <br> (100)
+                        </th>
+
+                        <th class="subject-subhead">
+                            Grade <br> Point
+                        </th>
+
+                        <th class="subject-subhead">
+                            Final <br> Grade
+                        </th>
+
+                        <th class="subject-subhead">
+                            Grade
+                        </th>
+
+                        <th class="subject-subhead">
+                            Credit
+                        </th>
+
+                    </ng-container>
+
+                </tr>
+
+            </thead>
+
+
+
+            <!-- BODY -->
+
+            <tbody>
+
+                <tr *ngFor="let student of displayData.students; let i = index">
+
+                    <td>
+                        {{ i + 1 }}
+                    </td>
+
+                    <td>
+                        {{ student.rollNo }}
+                    </td>
+
+                    <td>
+                        <div class="student-name">
+                            {{ student.name }}
+                        </div>
+                    </td>
+
+                    <td>
+                        {{ student.fatherName }}
+                    </td>
+
+                    <td>
+                        {{ student.motherName }}
+                    </td>
+
+                    <td>
+                        {{ student.aparrID }}
+                    </td>
+
+                    <td>
+                        {{ student.uid }}
+                    </td>
+
+                    <!-- SUBJECTS -->
+
+                    <ng-container *ngFor="let subject of displayData.examMaster.subjects">
+
+                        <ng-container *ngIf="student.subjectMap[subject.subjectCode] as sub else normalMarks">
+
+                            <td class="subject-mark">
+                                {{ sub.internalMarks }}
+                            </td>
+
+                            <td class="subject-mark">
+                                {{ sub.externalMarks }}
+                            </td>
+                            <td>
+                                {{ (sub.grace || 0) + (sub.averageGraceMarks || 0) || '-' }}
+                            </td>
+                            <td class="subject-mark total-cell">
+                                {{ sub.marks }}
+                            </td>
+                            <td class="subject-mark total-cell">
+                                {{ sub.marks != null ? (((sub.marks / (sub.maxMarks || 100)) * 100) | number:'1.0-2') :
+                                '' }}
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                                {{ sub.gradePoints }}
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                                {{ sub.grade }}
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                                {{ sub.earnedCreditPoints }}
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                                {{ sub.creditValue }}
+                            </td>
+
+                        </ng-container>
+
+                        <ng-template #normalMarks>
+                            <td class="subject-mark">
+                            </td>
+
+                            <td class="subject-mark">
+                            </td>
+
+                            <td class="subject-mark total-cell">
+                            </td>
+
+                            <td class="subject-mark total-cell">
+                            </td>
+
+                            <td class="subject-mark total-cell">
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                            </td>
+
+                            <td class="subject-mark grade-cell">
+                            </td>
+                        </ng-template>
+
+                    </ng-container>
+
+                    <!-- FINAL -->
+
+                    <td class="grade-cell">
+                        {{ student.totalPassedSubjectsCredit }}
+                    </td>
+
+                    <td class="total-cell">
+                        {{ student.creditEarned }}
+                    </td>
+                    <!--<td class="grade-cell">-->
+                    <ng-container *ngIf="
+    student.subjectMap[displayData.examMaster.subjects[0]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[1]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[2]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[3]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[4]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[5]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[6]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[7]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[8]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[9]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[10]?.subjectCode]?.grade === 'F' ||
+    student.subjectMap[displayData.examMaster.subjects[11]?.subjectCode]?.grade === 'F' ||
+
+    student.subjectMap[displayData.examMaster.subjects[0]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[1]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[2]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[3]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[4]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[5]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[6]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[7]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[8]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[9]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[10]?.subjectCode]?.attendance === 'ufm' ||
+    student.subjectMap[displayData.examMaster.subjects[11]?.subjectCode]?.attendance === 'ufm';
+
+    else normalResult">
+                        <td class="grade-cell">
+                            0
+                        </td>
+                    </ng-container>
+
+                    <ng-template #normalResult>
+                        <td class="grade-cell">
+                            {{ student.sgpa }}
+                        </td>
+                    </ng-template>
+                    <td></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

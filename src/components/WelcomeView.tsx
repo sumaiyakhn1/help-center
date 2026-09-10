@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle, ClipboardList, Plane, ArrowRight, HeartPulse, X, PhoneCall, Users, Gift, Play, Calendar, MonitorPlay } from 'lucide-react';
+import { BookOpen, Baby, Car, TrendingUp, PenTool, Settings, HelpCircle, ClipboardList, Plane, ArrowRight, HeartPulse, X, PhoneCall, Users, Gift, Play, Calendar, MonitorPlay, MessageSquare, ListChecks, Receipt, Shield, Award } from 'lucide-react';
 
 interface WelcomeViewProps {
   onEnterHelpCenter: () => void;
@@ -9,6 +9,7 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
   const [showHandbookModal, setShowHandbookModal] = useState(false);
   const [showInsuranceModal, setShowInsuranceModal] = useState(false);
   const [showFormsModal, setShowFormsModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
   const [showCelebrationsModal, setShowCelebrationsModal] = useState(false);
   const [celebrationView, setCelebrationView] = useState<'choice' | 'videos'>('choice');
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -62,11 +63,11 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
     },
     {
       id: 'help-center',
-      title: 'ERP User Manual',
-      description: 'ERP modules step-by-step guide and FAQs.',
+      title: 'ERP Modules',
+      description: 'Find answers in our FAQ or explore the ERP step-by-step guide.',
       icon: <HelpCircle className={`w-8 h-8 ${themeOrange.iconColor}`} />,
       url: '#',
-      onClick: onEnterHelpCenter,
+      onClick: () => setShowHelpModal(true),
       theme: themeOrange
     },
     {
@@ -114,7 +115,7 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
       title: 'CS Team KPI',
       description: 'Track and manage Customer Success team Key Performance Indicators.',
       icon: <TrendingUp className={`w-8 h-8 ${themeOrange.iconColor}`} />,
-      url: 'https://cskpi.odpay.in/',
+      url: 'https://cskpi.oderp.in/',
       theme: themeOrange
     },
     {
@@ -150,6 +151,38 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
       description: 'Watch and access recorded webinar sessions.',
       icon: <MonitorPlay className={`w-8 h-8 ${themeBlue.iconColor}`} />,
       url: 'https://ted.oderp.in/webinar',
+      theme: themeBlue
+    },
+    {
+      id: 'invoice-section',
+      title: 'Invoice Section',
+      description: 'Access the Invoice Section to manage and view invoices.',
+      icon: <Receipt className={`w-8 h-8 ${themeOrange.iconColor}`} />,
+      url: 'https://od-zoho-bot-api.vercel.app/login',
+      theme: themeOrange
+    },
+    {
+      id: 'checklist',
+      title: 'Checklist',
+      description: 'Manage your daily tasks and maintain your checklists efficiently.',
+      icon: <ListChecks className={`w-8 h-8 ${themeBlue.iconColor}`} />,
+      url: 'https://odchecklist.lovable.app/',
+      theme: themeBlue
+    },
+    {
+      id: 'company-policy',
+      title: 'Company Policy',
+      description: 'Read the latest company policies and guidelines.',
+      icon: <Shield className={`w-8 h-8 ${themeOrange.iconColor}`} />,
+      url: 'https://people.zoho.in/60034133438/zp#generalservice/companypolicy/listview',
+      theme: themeOrange
+    },
+    {
+      id: 'work-anniversaries',
+      title: 'Work Anniversaries',
+      description: 'Celebrate our team members\' work anniversaries and milestones.',
+      icon: <Award className={`w-8 h-8 ${themeBlue.iconColor}`} />,
+      url: 'http://odanniversaries.lovable.app/',
       theme: themeBlue
     }
   ];
@@ -279,6 +312,59 @@ export const WelcomeView: React.FC<WelcomeViewProps> = ({ onEnterHelpCenter }) =
                   </div>
                   <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showHelpModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 relative animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowHelpModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div className="mb-6 flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-600">
+                <HelpCircle className="w-6 h-6" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-800">ERP Modules</h2>
+            </div>
+            
+            <div className="space-y-4 text-slate-600 text-sm">
+              <p>Please select what kind of help you need:</p>
+              
+              <div className="space-y-3 mt-4">
+                <a 
+                  href="https://od-help-centre.up.railway.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-4 rounded-xl border border-blue-100 hover:border-blue-300 hover:bg-blue-50 transition-all group"
+                  onClick={() => setShowHelpModal(false)}
+                >
+                  <div>
+                    <h3 className="font-semibold text-slate-800 group-hover:text-blue-700">FAQ</h3>
+                    <p className="text-xs text-slate-500 mt-1">Quick answers to frequently asked questions.</p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-1 transition-transform" />
+                </a>
+
+                <button 
+                  onClick={() => {
+                    setShowHelpModal(false);
+                    onEnterHelpCenter();
+                  }}
+                  className="w-full flex items-center justify-between p-4 rounded-xl border border-orange-100 hover:border-orange-300 hover:bg-orange-50 transition-all group text-left"
+                >
+                  <div>
+                    <h3 className="font-semibold text-slate-800 group-hover:text-orange-700">ERP User Manual</h3>
+                    <p className="text-xs text-slate-500 mt-1">Detailed step-by-step guides for ERP modules.</p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-orange-400 group-hover:translate-x-1 transition-transform" />
+                </button>
               </div>
             </div>
           </div>
