@@ -1,49 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Users } from 'lucide-react';
-import { ref, onValue, runTransaction } from 'firebase/database';
-import { db } from '../firebase';
 
 export const VisitorCounter: React.FC = () => {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
-    const counterRef = ref(db, 'help_center_visitor_count');
-
-    // 1. Session tracking to ensure each visitor increments global count once per session
     const SESSION_KEY = 'okie_dokie_help_center_visited';
     const hasVisitedThisSession = sessionStorage.getItem(SESSION_KEY);
 
-    const START_COUNT = 15;
-
-    if (!hasVisitedThisSession) {
-      // Increment global counter in Firebase Realtime Database atomically starting from baseline 15
-      runTransaction(counterRef, (currentCount: any) => {
-        const base = (typeof currentCount === 'number' && currentCount >= START_COUNT) ? currentCount : (START_COUNT - 1);
-        return base + 1;
-      }).then(() => {
-        sessionStorage.setItem(SESSION_KEY, 'true');
-      }).catch((err: any) => {
-        console.error('Failed to increment visitor count:', err);
-      });
-    }
-
-    // 2. Real-time subscription to global count changes across all users
-    const unsubscribe = onValue(counterRef, (snapshot: any) => {
-      if (snapshot.exists()) {
-        const val = snapshot.val();
-        if (typeof val === 'number') {
-          setCount(Math.max(val, START_COUNT));
+    const fetchVisitorCount = async () => {
+      try {
+        if (!hasVisitedThisSession) {
+          // Increment global counter for a new visitor session
+          const res = await fetch('https://counterapi.com/api/okiedokie-help-center/view/visitors');
+          const data = await res.json();
+          if (data && typeof data.value === 'number') {
+            sessionStorage.setItem(SESSION_KEY, 'true');
+            setCount(data.value);
+          }
         } else {
-          setCount(START_COUNT);
+          // Read current global counter without incrementing for same session
+          const res = await fetch('https://counterapi.com/api/okiedokie-help-center/view/visitors?readOnly=true');
+          const data = await res.json();
+          if (data && typeof data.value === 'number') {
+            setCount(data.value);
+          }
         }
-      } else {
-        setCount(START_COUNT);
+      } catch (err) {
+        console.error('Error fetching visitor count:', err);
       }
-    }, (error: any) => {
-      console.error('Error reading visitor count from Firebase:', error);
-    });
+    };
 
-    return () => unsubscribe();
+    fetchVisitorCount();
   }, []);
 
   if (count === null) return null;
